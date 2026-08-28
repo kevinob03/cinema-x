@@ -48,6 +48,21 @@ export default function Entradas() {
                 <span className="entradas__order-total">{formatCurrency(order.subtotal)}</span>
               </div>
               <CartItemsList items={order.items} />
+              <div className="entradas__order-foot">
+                {order.delivery && (
+                  <span className="entradas__order-chip">Entrega: {order.delivery.label}</span>
+                )}
+                {order.items.some((line) => line.type === 'ticket') && (
+                  <span className="entradas__order-chip">
+                    Entrada: {order.items.find((line) => line.type === 'ticket').status?.status ?? 'pendiente'}
+                  </span>
+                )}
+                {order.items.some((line) => line.type === 'promo') && (
+                  <span className="entradas__order-chip">
+                    Dulcería: {order.items.find((line) => line.type === 'promo').status?.status ?? 'pendiente'}
+                  </span>
+                )}
+              </div>
             </article>
           ))}
         </div>

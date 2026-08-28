@@ -101,6 +101,25 @@
   color: var(--tertiary);
 }
 
+.entradas__order-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--vhs-stack);
+  padding-top: var(--gutter);
+  margin-top: var(--gutter);
+  border-top: 1px solid var(--outline-variant);
+}
+
+.entradas__order-chip {
+  padding: var(--unit) 8px;
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface-variant);
+  font-family: var(--font-meta);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
 .entradas__actions {
   margin-top: 40px;
   display: flex;

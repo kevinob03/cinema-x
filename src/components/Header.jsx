@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: '/', label: 'Inicio' },
   { to: '/cartelera', label: 'Cartelera' },
   { to: '/proximamente', label: 'Próximamente' },
+  { to: '/dulceria', label: 'Dulcería' },
   { to: '/favoritos', label: 'Mis películas' },
   { to: '/entradas', label: 'Entradas' },
   { to: '/cuenta', label: 'Mi Cuenta' },

@@ -17,6 +17,7 @@ import Carrito from './pages/Carrito.jsx'
 import Resumen from './pages/Resumen.jsx'
 import Confirmacion from './pages/Confirmacion.jsx'
 import Promociones from './pages/Promociones.jsx'
+import Dulceria from './pages/Dulceria.jsx'
 
 export default function App() {
   // Estructura base: header, contenido enrutado y footer
@@ -41,8 +42,9 @@ export default function App() {
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/resumen" element={<Resumen />} />
           <Route path="/confirmacion" element={<Confirmacion />} />
-          // Promociones disponibles
+          // Promociones y dulcería disponibles
           <Route path="/promociones" element={<Promociones />} />
+          <Route path="/dulceria" element={<Dulceria />} />
         </Routes>
       </main>
       <Footer />

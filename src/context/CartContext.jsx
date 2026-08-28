@@ -5,6 +5,7 @@ import {
   cartItemsCount,
   cartSubtotal,
   cartTicketsCount,
+  changePromoQuantity,
   createPromoLine,
   createTicketLine,
   removeItem,
@@ -22,6 +23,10 @@ function cartReducer(state, action) {
       return { items: addPromo(state.items, action.promoLine) }
     case 'REMOVE_ITEM':
       return { items: removeItem(state.items, action.id) }
+    case 'INCREMENT_PROMO':
+      return { items: changePromoQuantity(state.items, action.id, 1) }
+    case 'DECREMENT_PROMO':
+      return { items: changePromoQuantity(state.items, action.id, -1) }
     case 'CLEAR':
       return initialState
     default:
@@ -44,6 +49,14 @@ export default function CartProvider({ children }) {
     dispatch({ type: 'REMOVE_ITEM', id })
   }, [])
 
+  const incrementPromo = useCallback((id) => {
+    dispatch({ type: 'INCREMENT_PROMO', id })
+  }, [])
+
+  const decrementPromo = useCallback((id) => {
+    dispatch({ type: 'DECREMENT_PROMO', id })
+  }, [])
+
   const clear = useCallback(() => {
     dispatch({ type: 'CLEAR' })
   }, [])
@@ -58,12 +71,14 @@ export default function CartProvider({ children }) {
       addTickets,
       addPromoItem,
       removeItem: removeItemAction,
+      incrementPromo,
+      decrementPromo,
       clear,
       subtotal,
       ticketsCount,
       itemsCount,
     }),
-    [state.items, addTickets, addPromoItem, removeItemAction, clear, subtotal, ticketsCount, itemsCount],
+    [state.items, addTickets, addPromoItem, removeItemAction, incrementPromo, decrementPromo, clear, subtotal, ticketsCount, itemsCount],
   )
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>

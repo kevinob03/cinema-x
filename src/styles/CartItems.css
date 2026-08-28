@@ -97,3 +97,29 @@
 .cartline__remove .material-symbols-outlined {
   font-size: 18px;
 }
+
+.cartline__stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--vhs-stack);
+  border: 1px solid var(--outline-variant);
+}
+
+.cartline__step {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  transition: color 0.2s, background 0.2s;
+}
+
+.cartline__step:hover {
+  color: var(--primary-container);
+  background: var(--surface-container-high);
+}
+
+.cartline__step .material-symbols-outlined {
+  font-size: 18px;
+}

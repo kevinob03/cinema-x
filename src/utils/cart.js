@@ -49,6 +49,7 @@ export function addOrMergeTicket(items, ticketLine) {
 }
 
 export function createPromoLine(promo) {
+  const quantity = promo.quantity ?? 1
   return {
     id: `promo-${promo.id}`,
     type: 'promo',
@@ -57,13 +58,27 @@ export function createPromoLine(promo) {
     icon: promo.icon,
     accent: promo.accent,
     price: promo.price,
-    quantity: 1,
-    subtotal: promo.price,
+    quantity,
+    subtotal: promo.price * quantity,
   }
 }
 
 export function addPromo(items, promoLine) {
   return items.some((item) => item.id === promoLine.id) ? items : [...items, promoLine]
+}
+
+export function changePromoQuantity(items, id, delta) {
+  const target = items.find((item) => item.id === id && item.type === 'promo')
+  if (!target) return items
+  const nextQuantity = target.quantity + delta
+  if (nextQuantity <= 0) {
+    return items.filter((item) => item.id !== id)
+  }
+  return items.map((item) =>
+    item.id === id
+      ? { ...item, quantity: nextQuantity, subtotal: item.price * nextQuantity }
+      : item,
+  )
 }
 
 export function removeItem(items, id) {

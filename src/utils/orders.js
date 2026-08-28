@@ -1,11 +1,31 @@
 const STORAGE_KEY = 'cinemaX_orders'
 
-export function buildOrderRecord({ orderNumber, items, subtotal, owner }) {
+export function buildOrderId() {
+  const random = Math.random().toString(36).slice(2, 10)
+  const hex = Array.from(crypto.getRandomValues(new Uint8Array(6)))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('')
+  return `CX-${random}-${hex}`
+}
+
+function buildItemStatus(line) {
+  if (line.type === 'ticket') {
+    return { kind: 'entrada', status: 'pendiente' }
+  }
+  return { kind: 'dulceria', status: 'pendiente' }
+}
+
+export function buildOrderRecord({ orderId, orderNumber, items, subtotal, owner, delivery }) {
   return {
+    orderId,
     orderNumber,
     createdAt: new Date().toISOString(),
     owner: owner ?? null,
-    items,
+    delivery: delivery ?? null,
+    items: items.map((line) => ({
+      ...line,
+      status: buildItemStatus(line),
+    })),
     subtotal,
   }
 }

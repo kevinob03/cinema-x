@@ -6,7 +6,7 @@ import CineState from '../components/CineState.jsx'
 import '../styles/Carrito.css'
 
 export default function Carrito() {
-  const { items, itemsCount, subtotal, removeItem } = useCart()
+  const { items, itemsCount, subtotal, removeItem, incrementPromo, decrementPromo } = useCart()
   const navigate = useNavigate()
 
   return (
@@ -20,7 +20,12 @@ export default function Carrito() {
         <CineState kind="empty" message="Todavía no hay entradas en transmisión." />
       ) : (
         <>
-          <CartItemsList items={items} onRemove={removeItem} />
+          <CartItemsList
+            items={items}
+            onRemove={removeItem}
+            onIncrement={incrementPromo}
+            onDecrement={decrementPromo}
+          />
           <div className="carrito__totals">
             <span className="carrito__totals-label">
               Subtotal ({itemsCount} artículo{itemsCount === 1 ? '' : 's'})
