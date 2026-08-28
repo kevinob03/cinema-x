@@ -1,0 +1,108 @@
+.entradas {
+  padding-top: 56px;
+  padding-bottom: var(--gutter);
+}
+
+.entradas__header {
+  border-bottom: 1px solid var(--outline-variant);
+  padding-bottom: var(--gutter);
+  margin-bottom: 32px;
+}
+
+.entradas__title {
+  font-family: var(--font-display);
+  font-size: var(--headline-lg);
+  line-height: var(--headline-lg-lh);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.entradas__line {
+  height: 1px;
+  background: var(--primary-container);
+  margin-top: var(--gutter);
+}
+
+.entradas__intro {
+  margin-top: var(--gutter);
+  font-family: var(--font-body);
+  font-size: var(--body);
+  color: var(--on-surface-variant);
+}
+
+.entradas__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 48px 0;
+}
+
+.entradas__empty-link {
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  transition: text-shadow 0.2s;
+}
+
+.entradas__empty-link:hover {
+  text-shadow: 0 0 12px var(--primary-container);
+}
+
+.entradas__list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.entradas__order {
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  padding: 24px;
+}
+
+.entradas__order-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gutter);
+  padding-bottom: var(--gutter);
+  margin-bottom: var(--gutter);
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.entradas__order-id {
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.entradas__order-date {
+  display: block;
+  margin-top: var(--unit);
+  font-family: var(--font-meta);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--outline);
+}
+
+.entradas__order-total {
+  flex-shrink: 0;
+  font-family: var(--font-meta);
+  font-size: var(--headline-mobile);
+  line-height: 1;
+  color: var(--tertiary);
+}
+
+.entradas__actions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}

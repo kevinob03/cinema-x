@@ -1,9 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { getMovieDetails, mapDetail } from '../services/tmdb.js'
 import { getScreeningsForMovie } from '../data/screenings.js'
 import Screenings from '../components/Screenings.jsx'
 import CineState from '../components/CineState.jsx'
+import useMovieDetails from '../hooks/useMovieDetails.js'
+import { useFavorites } from '../context/FavoritesContext.jsx'
+import { buildCardFromDetail } from '../utils/favorites.js'
 import '../styles/Pelicula.css'
 
 function formatDate(dateStr) {
@@ -16,31 +18,16 @@ function formatDate(dateStr) {
 export default function Pelicula() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [movie, setMovie] = useState(null)
-  const [status, setStatus] = useState('loading')
-  const [error, setError] = useState(null)
+  const { movie, status, error } = useMovieDetails(id)
+  const { isFavorite, toggleFavorite } = useFavorites()
   const screenings = useMemo(() => getScreeningsForMovie(id), [id])
 
-  useEffect(() => {
-    let cancelled = false
-    setStatus('loading')
+  const favorite = movie ? isFavorite(movie.id) : false
 
-    getMovieDetails(id)
-      .then((data) => {
-        if (cancelled) return
-        setMovie(mapDetail(data))
-        setStatus('ready')
-      })
-      .catch((err) => {
-        if (cancelled) return
-        setError(err)
-        setStatus('error')
-      })
-
-    return () => {
-      cancelled = true
-    }
-  }, [id])
+  const handleToggleFavorite = () => {
+    if (!movie) return
+    toggleFavorite(buildCardFromDetail(movie))
+  }
 
   return (
     <section className="pelicula">
@@ -81,7 +68,20 @@ export default function Pelicula() {
                 {movie.accent === 'green' ? 'Terror en VHS' : 'Ciencia Ficción Nocturna'} · Función de medianoche
               </span>
 
-              <h1 className="pelicula__title">{movie.title}</h1>
+              <div className="pelicula__title-row">
+                <h1 className="pelicula__title">{movie.title}</h1>
+                <button
+                  type="button"
+                  className={`pelicula__fav ${favorite ? 'pelicula__fav--on' : ''}`}
+                  aria-pressed={favorite}
+                  aria-label={favorite ? `Quitar ${movie.title} de favoritos` : `Agregar ${movie.title} a favoritos`}
+                  onClick={handleToggleFavorite}
+                >
+                  <span className="material-symbols-outlined" aria-hidden="true">
+                    {favorite ? 'favorite' : 'favorite_border'}
+                  </span>
+                </button>
+              </div>
               {movie.originalTitle && movie.originalTitle !== movie.title && (
                 <span className="pelicula__original">{movie.originalTitle}</span>
               )}

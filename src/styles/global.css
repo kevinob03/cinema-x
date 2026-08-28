@@ -156,6 +156,13 @@ h3 {
   padding-right: var(--margin-safe);
 }
 
+@media (max-width: 480px) {
+  .cinema-x-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
 /* ---------- Overlay de scanlines VHS ---------- */
 .vhs-scanlines {
   position: fixed;
@@ -212,6 +219,22 @@ h3 {
   background: var(--primary-container);
   color: var(--on-primary-container);
   box-shadow: 2px 2px 0 var(--primary-container);
+}
+
+.btn-marquee:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: 2px 2px 0 var(--primary-container);
+}
+
+.btn-marquee:disabled:hover {
+  background: var(--background);
+  color: var(--primary-container);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 /* ---------- Interferencia (glitch hover 1px) ---------- */
