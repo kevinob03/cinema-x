@@ -1,0 +1,240 @@
+/* ============================================================
+   CINEMA X — Identidad visual Stitch
+   Midnight Matinee · Retro-Brutalism · Vaporwave-Noir · VHS 80s
+   ============================================================ */
+
+:root {
+  /* ---------- Paleta Midnight Matinee ---------- */
+  --background: #131313;
+  --surface-container-lowest: #0e0e0e;
+  --surface-container-low: #1c1b1b;
+  --surface-container: #201f1f;
+  --surface-container-high: #2a2a2a;
+  --surface-container-highest: #353534;
+  --surface-bright: #3a3939;
+  --on-surface: #e5e2e1;
+  --on-surface-variant: #e5bcc5;
+  --outline: #ac878f;
+  --outline-variant: #5c3f46;
+
+  --primary: #ffb1c4;
+  --on-primary: #65002e;
+  --primary-container: #ff4a8d;
+  --on-primary-container: #590028;
+  --inverse-primary: #ba005b;
+  --primary-fixed: #ffd9e1;
+  --primary-fixed-dim: #ffb1c4;
+
+  --secondary: #dfb7ff;
+  --on-secondary: #4b007e;
+  --secondary-container: #9d05ff;
+  --on-secondary-container: #f7e6ff;
+  --secondary-fixed: #f1daff;
+  --secondary-fixed-dim: #dfb7ff;
+
+  --tertiary: #2ae500;
+  --on-tertiary: #053900;
+  --tertiary-container: #1da800;
+  --on-tertiary-container: #043200;
+  --tertiary-fixed: #79ff5b;
+  --tertiary-fixed-dim: #2ae500;
+
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+
+  /* ---------- Tipografía ---------- */
+  --font-display: 'Bricolage Grotesque', 'Arial Black', sans-serif;
+  --font-body: 'Courier Prime', 'Courier New', monospace;
+  --font-meta: 'Space Mono', 'Courier New', monospace;
+
+  /* ---------- Escala tipográfica ---------- */
+  --display-horror: clamp(44px, 8vw, 72px);
+  --display-horror-lh: clamp(44px, 8vw, 72px);
+  --headline-lg: clamp(32px, 5vw, 48px);
+  --headline-lg-lh: clamp(36px, 5.5vw, 52px);
+  --headline-mobile: 32px;
+  --headline-mobile-lh: 36px;
+  --body: 16px;
+  --metadata: 12px;
+
+  /* ---------- Espaciado ---------- */
+  --unit: 4px;
+  --gutter: 16px;
+  --margin-safe: 32px;
+  --vhs-stack: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--on-surface);
+  background-color: var(--background);
+  background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+  font-family: var(--font-body);
+  font-size: var(--body);
+  line-height: 24px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+::selection {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+}
+
+/* ---------- App shell ---------- */
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__main {
+  flex: 1;
+  padding-top: 80px;
+}
+
+/* ---------- Contenedor letterbox ---------- */
+.cinema-x-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: var(--margin-safe);
+  padding-right: var(--margin-safe);
+}
+
+/* ---------- Overlay de scanlines VHS ---------- */
+.vhs-scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ---------- Chip / etiqueta Dymo ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface-container-high);
+  color: var(--on-surface);
+  border: 1px solid var(--outline-variant);
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--unit) 8px;
+}
+
+/* ---------- Botón marquee (hard-offset shadow) ---------- */
+.btn-marquee {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--background);
+  border: 2px solid var(--primary-container);
+  color: var(--primary-container);
+  font-family: var(--font-display);
+  font-size: var(--headline-mobile);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  box-shadow: 4px 4px 0 var(--primary-container);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.btn-marquee:hover {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  box-shadow: 2px 2px 0 var(--primary-container);
+}
+
+/* ---------- Interferencia (glitch hover 1px) ---------- */
+@keyframes h-glitch {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+
+/* ---------- Pulso ---------- */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn-marquee,
+  .movie-card,
+  .inicio__badge-dot {
+    animation: none !important;
+  }
+}

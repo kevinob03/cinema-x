@@ -1,0 +1,259 @@
+.cartelera {
+  padding-top: 56px;
+  padding-bottom: var(--gutter);
+}
+
+.cartelera__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .cartelera__layout {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+/* ---------- Main ---------- */
+.cartelera__main {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .cartelera__main {
+    grid-column: span 8;
+  }
+}
+
+.cartelera__header {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter);
+  border-bottom: 1px solid var(--outline-variant);
+  padding-bottom: var(--gutter);
+  margin-bottom: 32px;
+}
+
+.cartelera__title {
+  font-family: var(--font-display);
+  font-size: var(--headline-lg);
+  line-height: var(--headline-lg-lh);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.cartelera__line {
+  flex: 1;
+  height: 1px;
+  background: var(--primary-container);
+}
+
+.cartelera__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .cartelera__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Sidebar ---------- */
+.cartelera__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .cartelera__sidebar {
+    grid-column: span 4;
+  }
+}
+
+/* Modulo Transmitting Soon */
+.cartelera__module {
+  position: relative;
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  padding: 24px;
+  overflow: hidden;
+}
+
+.cartelera__module::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.cartelera__module-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--vhs-stack);
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  line-height: 16px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--outline-variant);
+  margin-bottom: 24px;
+}
+
+.cartelera__module-title .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.cartelera__soon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--vhs-stack);
+}
+
+.cartelera__soon-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gutter);
+  padding: var(--vhs-stack);
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.cartelera__soon-item:hover {
+  background: var(--surface-container-high);
+  border-color: var(--outline-variant);
+}
+
+.cartelera__soon-thumb {
+  width: 64px;
+  height: 96px;
+  flex-shrink: 0;
+  border: 1px solid var(--outline-variant);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-container-lowest);
+}
+
+.cartelera__soon-thumb .material-symbols-outlined {
+  font-size: 24px;
+  color: var(--outline-variant);
+}
+
+.cartelera__soon-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--unit) 0;
+}
+
+.cartelera__soon-title {
+  font-family: var(--font-body);
+  font-size: var(--body);
+  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--on-surface);
+  transition: color 0.2s;
+}
+
+.cartelera__soon-item:nth-child(1):hover .cartelera__soon-title {
+  color: var(--primary-container);
+}
+
+.cartelera__soon-item:nth-child(2):hover .cartelera__soon-title {
+  color: var(--secondary-container);
+}
+
+.cartelera__soon-item:nth-child(3):hover .cartelera__soon-title {
+  color: var(--primary);
+}
+
+.cartelera__soon-date {
+  font-family: var(--font-meta);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--outline);
+  margin-top: var(--unit);
+}
+
+/* Promo Midnight Special (visual) */
+.cartelera__promo {
+  position: relative;
+  background: var(--surface-container-lowest);
+  border: 2px solid var(--tertiary-container);
+  box-shadow: 4px 4px 0 var(--tertiary-container);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.cartelera__promo > .material-symbols-outlined {
+  font-size: 48px;
+  color: var(--tertiary-container);
+  margin-bottom: var(--gutter);
+}
+
+.cartelera__promo-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: var(--headline-mobile);
+  line-height: 1.1;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.cartelera__promo-accent {
+  color: var(--tertiary);
+}
+
+.cartelera__promo-text {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: var(--body);
+  line-height: 24px;
+  color: var(--on-surface-variant);
+  margin-top: var(--vhs-stack);
+}
+
+.cartelera__promo-price {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin-top: 24px;
+  padding: var(--vhs-stack) var(--gutter);
+  border: 1px solid var(--tertiary-container);
+  background: rgba(19, 19, 19, 0.5);
+  font-family: var(--font-meta);
+  font-size: var(--headline-mobile);
+  line-height: 1;
+  color: var(--tertiary-fixed);
+}
+
+/* ---------- Nota ---------- */
+.cartelera__note {
+  margin-top: 40px;
+  text-align: center;
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--outline);
+}
