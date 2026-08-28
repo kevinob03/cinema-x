@@ -1,0 +1,230 @@
+.inicio {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Hero ---------- */
+.inicio__hero {
+  position: relative;
+  height: 600px;
+  margin-bottom: 64px;
+  border-bottom: 2px solid var(--primary-container);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .inicio__hero {
+    height: 700px;
+  }
+}
+
+.inicio__hero-bg {
+  position: absolute;
+  inset: 0;
+  background-color: var(--surface-container-lowest);
+  background-image:
+    radial-gradient(circle at 72% 30%, rgba(255, 74, 141, 0.22), transparent 42%),
+    radial-gradient(circle at 25% 72%, rgba(42, 229, 0, 0.14), transparent 45%),
+    linear-gradient(160deg, #0a0a0a 0%, #131313 100%);
+}
+
+.inicio__hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    url('https://www.transparenttextures.com/patterns/carbon-fibre.png'),
+    linear-gradient(to top, var(--background) 0%, rgba(19, 19, 19, 0.8) 55%, transparent 100%);
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+.inicio__hero-inner {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .inicio__hero-inner {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+/* Columna izquierda */
+.inicio__hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter);
+  max-width: 720px;
+}
+
+.inicio__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  border: 1px solid var(--on-primary-container);
+  padding: var(--unit) 8px;
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: skewX(-12deg);
+}
+
+.inicio__badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--on-primary-container);
+  animation: pulse 1.6s infinite;
+}
+
+.inicio__title {
+  font-family: var(--font-display);
+  font-size: var(--display-horror);
+  line-height: var(--display-horror-lh);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  transform: skewX(-2deg);
+  color: var(--primary-fixed);
+  text-shadow: 3px 3px 0 rgba(157, 5, 255, 0.35);
+}
+
+.inicio__title-accent {
+  color: var(--secondary-fixed);
+}
+
+.inicio__tagline {
+  font-family: var(--font-body);
+  font-size: var(--body);
+  line-height: 24px;
+  color: var(--on-surface-variant);
+  max-width: 560px;
+}
+
+.inicio__chips {
+  display: flex;
+  gap: var(--vhs-stack);
+  flex-wrap: wrap;
+}
+
+/* Columna derecha */
+.inicio__hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .inicio__hero-right {
+    align-items: flex-end;
+  }
+}
+
+.inicio__next-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface-container-low);
+  border: 2px solid var(--tertiary-container);
+  box-shadow: 4px 4px 0 var(--tertiary-container);
+  padding: var(--gutter);
+  transform: skewX(3deg);
+}
+
+.inicio__next-label {
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tertiary-fixed);
+  margin-bottom: 8px;
+}
+
+.inicio__next-time {
+  font-family: var(--font-meta);
+  font-size: var(--headline-mobile);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  color: var(--tertiary);
+}
+
+/* ---------- Sección Double Feature ---------- */
+.inicio__feature {
+  display: flex;
+  flex-direction: column;
+}
+
+.inicio__feature-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter);
+  border-bottom: 1px solid var(--outline-variant);
+  padding-bottom: var(--gutter);
+  margin-bottom: 32px;
+}
+
+.inicio__feature-title {
+  font-family: var(--font-display);
+  font-size: var(--headline-lg);
+  line-height: var(--headline-lg-lh);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.inicio__feature-line {
+  flex: 1;
+  height: 1px;
+  background: var(--primary-container);
+}
+
+.inicio__feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .inicio__feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.inicio__more {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.inicio__more-link {
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  transition: text-shadow 0.2s;
+}
+
+.inicio__more-link:hover {
+  text-shadow: 0 0 12px var(--primary-container);
+}
