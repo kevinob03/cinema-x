@@ -1,6 +1,8 @@
 import MovieCard from '../components/MovieCard.jsx'
 import CineState from '../components/CineState.jsx'
 import useCartelera from '../hooks/useCartelera.js'
+import { PROMOTIONS } from '../data/promotions.js'
+import { formatCurrency } from '../utils/cart.js'
 import '../styles/Cartelera.css'
 
 const SORT_OPTIONS = [
@@ -23,6 +25,7 @@ export default function Cartelera() {
     useCartelera()
 
   const topSoon = [...pool].sort((a, b) => b.voteAverage - a.voteAverage).slice(0, 3)
+  const comboPromo = PROMOTIONS.find((promo) => promo.id === 'combo-mutante')
 
   return (
     <section className="cartelera cinema-x-container">
@@ -169,16 +172,16 @@ export default function Cartelera() {
 
           <div className="cartelera__promo">
             <span className="material-symbols-outlined" aria-hidden="true">
-              local_pizza
+              {comboPromo.icon}
             </span>
             <h3 className="cartelera__promo-title">
-              El Combo Mutante
+              {comboPromo.title}
               <br />
-              <span className="cartelera__promo-accent">de Palomitas</span>
+              <span className="cartelera__promo-accent">{comboPromo.accent}</span>
             </h3>
-            <p className="cartelera__promo-text">Palomitas radiactivas grandes &amp; 2 sodas tóxicas.</p>
+            <p className="cartelera__promo-text">{comboPromo.description}</p>
             <div className="cartelera__promo-price" aria-hidden="true">
-              $19.84
+              {formatCurrency(comboPromo.price)}
             </div>
           </div>
         </aside>

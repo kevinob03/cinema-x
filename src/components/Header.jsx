@@ -1,7 +1,10 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { useCart } from '../context/CartContext.jsx'
 import '../styles/Header.css'
 
 export default function Header() {
+  const { itemsCount } = useCart()
+
   return (
     <header className="header">
       <div className="header__inner cinema-x-container">
@@ -25,9 +28,14 @@ export default function Header() {
         </nav>
 
         <div className="header__actions">
-          <button type="button" className="header__icon-btn" aria-label="Carrito (próximamente)">
+          <Link
+            to="/carrito"
+            className="header__icon-btn header__cart"
+            aria-label={`Carrito, ${itemsCount} artículo${itemsCount === 1 ? '' : 's'}`}
+          >
             <span className="material-symbols-outlined">shopping_cart</span>
-          </button>
+            {itemsCount > 0 && <span className="header__cart-badge">{itemsCount}</span>}
+          </Link>
           <div className="header__avatar" aria-hidden="true">
             <span className="material-symbols-outlined header__avatar-icon">person</span>
           </div>

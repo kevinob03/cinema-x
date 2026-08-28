@@ -1,0 +1,106 @@
+.asientos {
+  padding-top: 56px;
+  padding-bottom: var(--gutter);
+}
+
+.asientos__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--vhs-stack);
+  margin-bottom: 24px;
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  transition: text-shadow 0.2s;
+}
+
+.asientos__back:hover {
+  text-shadow: 0 0 12px var(--primary-container);
+}
+
+.asientos__back .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.asientos__content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.asientos__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--gutter);
+  padding-bottom: var(--gutter);
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.asientos__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vhs-stack);
+}
+
+.asientos__title {
+  font-family: var(--font-display);
+  font-size: var(--headline-lg);
+  line-height: var(--headline-lg-lh);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.asientos__subtitle {
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--outline);
+}
+
+.asientos__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gutter);
+  padding-top: var(--gutter);
+  border-top: 1px solid var(--outline-variant);
+}
+
+.asientos__summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--vhs-stack);
+}
+
+.asientos__count {
+  font-family: var(--font-meta);
+  font-size: var(--metadata);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--outline);
+}
+
+.asientos__total {
+  font-family: var(--font-display);
+  font-size: var(--headline-lg);
+  font-weight: 800;
+  color: var(--tertiary-fixed);
+}
+
+.asientos__add:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.asientos__add:disabled:hover {
+  background: var(--background);
+  color: var(--primary-container);
+}
