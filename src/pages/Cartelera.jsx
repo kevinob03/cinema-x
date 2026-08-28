@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import MovieCard from '../components/MovieCard.jsx'
 import CineState from '../components/CineState.jsx'
+import DateSelector from '../components/DateSelector.jsx'
 import useCartelera from '../hooks/useCartelera.js'
 import { PROMOTIONS } from '../data/promotions.js'
 import { formatCurrency } from '../utils/cart.js'
@@ -24,6 +26,8 @@ export default function Cartelera() {
   const { status, error, genres, years, movies, pool, filters, setFilter, resetFilters, isFiltering } =
     useCartelera()
 
+  const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().slice(0, 10))
+
   const topSoon = [...pool].sort((a, b) => b.voteAverage - a.voteAverage).slice(0, 3)
   const comboPromo = PROMOTIONS.find((promo) => promo.id === 'combo-mutante')
 
@@ -33,7 +37,7 @@ export default function Cartelera() {
         {/* ---------- Main content ---------- */}
         <div className="cartelera__main">
           <header className="cartelera__header">
-            <h2 className="cartelera__title">Doble Función</h2>
+            <h2 className="cartelera__title">Cartelera</h2>
             <div className="cartelera__line" aria-hidden="true" />
           </header>
 
@@ -118,7 +122,7 @@ export default function Cartelera() {
 
             <div className="cartelera__toolbar-foot">
               <span className="cartelera__count">
-                {status === 'ready' && `${movies.length} título${movies.length === 1 ? '' : 's'} en transmisión`}
+                {status === 'ready' && `${movies.length} película${movies.length === 1 ? '' : 's'} en cartelera`}
               </span>
               {isFiltering && (
                 <button type="button" className="cartelera__clear" onClick={resetFilters}>
@@ -127,6 +131,8 @@ export default function Cartelera() {
               )}
             </div>
           </div>
+
+          <DateSelector selectedDate={selectedDate} onSelect={setSelectedDate} />
 
           {status === 'loading' && <CineState kind="loading" />}
           {status === 'error' && <CineState kind="error" message={error?.message} />}

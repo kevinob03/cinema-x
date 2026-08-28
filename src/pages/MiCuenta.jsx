@@ -71,7 +71,7 @@ export default function MiCuenta() {
 
           <div className="cuenta__links">
             <Link to="/favoritos" className="cuenta__link">
-              Mis favoritos →
+              Mis películas →
             </Link>
             <Link to="/entradas" className="cuenta__link">
               Mis entradas →

@@ -1,19 +1,48 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import MovieCard from '../components/MovieCard.jsx'
 import CineState from '../components/CineState.jsx'
 import QuickBuy from '../components/QuickBuy.jsx'
-import MovieCarousel from '../components/MovieCarousel.jsx'
+import FoodCarousel from '../components/FoodCarousel.jsx'
 import useCartelera from '../hooks/useCartelera.js'
 import '../styles/Inicio.css'
 
+const HERO_COUNT = 5
+const HERO_INTERVAL = 6000
+
 export default function Inicio() {
   const { status, error, movies } = useCartelera()
-  const featured = movies[0]
   const weekly = movies.slice(0, 8)
-  const carouselMovies = movies.slice(8)
-  const heroTheme = featured?.accent === 'green' ? 'Terror VHS' : 'Sci-Fi Noir'
+  const heroMovies = movies.slice(0, HERO_COUNT)
+  const [heroIndex, setHeroIndex] = useState(0)
+  const timerRef = useRef(null)
+  const slide = heroMovies[heroIndex]
 
-  const fallbackTitle = status === 'loading' ? 'Capturando señal…' : status === 'error' ? 'Sin señal' : 'En espera…'
+  useEffect(() => {
+    if (heroMovies.length < 2) return undefined
+    const start = () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+      timerRef.current = setInterval(() => {
+        setHeroIndex((current) => (current + 1) % heroMovies.length)
+      }, HERO_INTERVAL)
+    }
+    start()
+    return () => clearInterval(timerRef.current)
+  }, [heroMovies.length])
+
+  const goToSlide = (index) => {
+    setHeroIndex(((index % heroMovies.length) + heroMovies.length) % heroMovies.length)
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+      timerRef.current = setInterval(() => {
+        setHeroIndex((current) => (current + 1) % heroMovies.length)
+      }, HERO_INTERVAL)
+    }
+  }
+
+  const heroBackdrop = slide?.backdrop || slide?.poster
+  const fallbackTitle =
+    status === 'loading' ? 'Capturando señal…' : status === 'error' ? 'Sin señal' : 'En espera…'
 
   return (
     <section className="inicio">
@@ -23,27 +52,24 @@ export default function Inicio() {
       {/* ---------- Hero ---------- */}
       <div className="inicio__hero">
         <div className="inicio__hero-bg" aria-hidden="true" />
+        {heroBackdrop && (
+          <div
+            className="inicio__hero-bg-img"
+            style={{ backgroundImage: `url('${heroBackdrop}')` }}
+            aria-hidden="true"
+          />
+        )}
         <div className="inicio__hero-inner cinema-x-container">
           <div className="inicio__hero-left">
-            <span className="inicio__badge">
+            <span className="inicio__badge" key={`badge-${slide?.id ?? 'empty'}-${heroIndex}`}>
               <span className="inicio__badge-dot" aria-hidden="true" />
               Now Playing
             </span>
 
-            {featured ? (
-              <>
-                <h1 className="inicio__title">
-                  {featured.title}
-                  <br />
-                  <span className="inicio__title-accent">{heroTheme}</span>
-                </h1>
-                <p className="inicio__tagline">{featured.overview}</p>
-                <div className="inicio__chips">
-                  <span className="chip">{featured.year}</span>
-                  <span className="chip">{featured.genre}</span>
-                  {featured.rating != null && <span className="chip">★ {featured.rating}</span>}
-                </div>
-              </>
+            {slide ? (
+              <h1 className="inicio__title" key={`title-${slide.id}`}>
+                {slide.title}
+              </h1>
             ) : (
               <h1 className="inicio__title">
                 Cinema X
@@ -66,6 +92,45 @@ export default function Inicio() {
             </Link>
           </div>
         </div>
+
+        {heroMovies.length > 1 && (
+          <>
+            <button
+              type="button"
+              className="inicio__hero-arrow inicio__hero-arrow--prev"
+              aria-label="Película anterior"
+              onClick={() => goToSlide(heroIndex - 1)}
+            >
+              <span className="material-symbols-outlined" aria-hidden="true">
+                arrow_back
+              </span>
+            </button>
+            <button
+              type="button"
+              className="inicio__hero-arrow inicio__hero-arrow--next"
+              aria-label="Siguiente película"
+              onClick={() => goToSlide(heroIndex + 1)}
+            >
+              <span className="material-symbols-outlined" aria-hidden="true">
+                arrow_forward
+              </span>
+            </button>
+
+            <div className="inicio__hero-dots" role="tablist" aria-label="Películas destacadas">
+              {heroMovies.map((movie, index) => (
+                <button
+                  key={movie.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === heroIndex}
+                  aria-label={`Ver ${movie.title}`}
+                  className={`inicio__hero-dot ${index === heroIndex ? 'inicio__hero-dot--active' : ''}`}
+                  onClick={() => goToSlide(index)}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {/* ---------- Cartelera Semanal ---------- */}
@@ -94,20 +159,14 @@ export default function Inicio() {
         </div>
       </div>
 
-      {/* ---------- Toda la cartelera ---------- */}
-      {carouselMovies.length > 0 && (
-        <div className="inicio__carousel cinema-x-container">
-          <div className="inicio__feature-header">
-            <h2 className="inicio__feature-title">Toda la cartelera</h2>
-            <div className="inicio__feature-line" aria-hidden="true" />
-          </div>
-          <MovieCarousel>
-            {carouselMovies.map((movie) => (
-              <MovieCard key={movie.id} {...movie} to={`/pelicula/${movie.id}`} />
-            ))}
-          </MovieCarousel>
+      {/* ---------- Comida y Combos ---------- */}
+      <div className="inicio__food cinema-x-container">
+        <div className="inicio__feature-header">
+          <h2 className="inicio__feature-title">Comida y Combos</h2>
+          <div className="inicio__feature-line" aria-hidden="true" />
         </div>
-      )}
+        <FoodCarousel />
+      </div>
     </section>
   )
 }
