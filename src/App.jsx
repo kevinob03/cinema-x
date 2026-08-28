@@ -4,6 +4,11 @@ import Footer from './components/Footer.jsx'
 import Inicio from './pages/Inicio.jsx'
 import Cartelera from './pages/Cartelera.jsx'
 import Pelicula from './pages/Pelicula.jsx'
+import Asientos from './pages/Asientos.jsx'
+import Carrito from './pages/Carrito.jsx'
+import Resumen from './pages/Resumen.jsx'
+import Confirmacion from './pages/Confirmacion.jsx'
+import Promociones from './pages/Promociones.jsx'
 
 export default function App() {
   return (
@@ -14,6 +19,11 @@ export default function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/cartelera" element={<Cartelera />} />
           <Route path="/pelicula/:id" element={<Pelicula />} />
+          <Route path="/asientos/:movieId/:screeningId" element={<Asientos />} />
+          <Route path="/carrito" element={<Carrito />} />
+          <Route path="/resumen" element={<Resumen />} />
+          <Route path="/confirmacion" element={<Confirmacion />} />
+          <Route path="/promociones" element={<Promociones />} />
         </Routes>
       </main>
       <Footer />

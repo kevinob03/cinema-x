@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getMovieDetails, mapDetail } from '../services/tmdb.js'
+import { getScreeningsForMovie } from '../data/screenings.js'
+import Screenings from '../components/Screenings.jsx'
 import CineState from '../components/CineState.jsx'
 import '../styles/Pelicula.css'
 
@@ -13,9 +15,11 @@ function formatDate(dateStr) {
 
 export default function Pelicula() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [movie, setMovie] = useState(null)
   const [status, setStatus] = useState('loading')
   const [error, setError] = useState(null)
+  const screenings = useMemo(() => getScreeningsForMovie(id), [id])
 
   useEffect(() => {
     let cancelled = false
@@ -123,6 +127,14 @@ export default function Pelicula() {
                   <dd>{movie.voteCount}</dd>
                 </div>
               </dl>
+
+              <div className="pelicula__screenings">
+                <Screenings
+                  screenings={screenings}
+                  accent={movie.accent}
+                  onSelect={(screening) => navigate(`/asientos/${movie.id}/${screening.id}`)}
+                />
+              </div>
             </div>
           </div>
         </div>
