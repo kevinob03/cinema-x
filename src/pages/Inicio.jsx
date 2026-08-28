@@ -1,19 +1,25 @@
 import { Link } from 'react-router-dom'
 import MovieCard from '../components/MovieCard.jsx'
 import CineState from '../components/CineState.jsx'
+import QuickBuy from '../components/QuickBuy.jsx'
+import MovieCarousel from '../components/MovieCarousel.jsx'
 import useCartelera from '../hooks/useCartelera.js'
 import '../styles/Inicio.css'
 
 export default function Inicio() {
   const { status, error, movies } = useCartelera()
   const featured = movies[0]
-  const previewMovies = movies.slice(0, 2)
+  const weekly = movies.slice(0, 8)
+  const carouselMovies = movies.slice(8)
   const heroTheme = featured?.accent === 'green' ? 'Terror VHS' : 'Sci-Fi Noir'
 
   const fallbackTitle = status === 'loading' ? 'Capturando señal…' : status === 'error' ? 'Sin señal' : 'En espera…'
 
   return (
     <section className="inicio">
+      {/* ---------- Compra Rápida ---------- */}
+      <QuickBuy movies={movies} status={status} error={error} />
+
       {/* ---------- Hero ---------- */}
       <div className="inicio__hero">
         <div className="inicio__hero-bg" aria-hidden="true" />
@@ -62,20 +68,20 @@ export default function Inicio() {
         </div>
       </div>
 
-      {/* ---------- Double Feature ---------- */}
+      {/* ---------- Cartelera Semanal ---------- */}
       <div className="inicio__feature cinema-x-container">
         <div className="inicio__feature-header">
-          <h2 className="inicio__feature-title">Doble Función</h2>
+          <h2 className="inicio__feature-title">Cartelera Semanal</h2>
           <div className="inicio__feature-line" aria-hidden="true" />
         </div>
 
         {status === 'loading' && <CineState kind="loading" />}
         {status === 'error' && <CineState kind="error" message={error?.message} />}
-        {status === 'ready' && previewMovies.length === 0 && <CineState kind="empty" />}
+        {status === 'ready' && weekly.length === 0 && <CineState kind="empty" />}
 
-        {previewMovies.length > 0 && (
-          <div className="inicio__feature-grid">
-            {previewMovies.map((movie) => (
+        {weekly.length > 0 && (
+          <div className="inicio__weekly-grid">
+            {weekly.map((movie) => (
               <MovieCard key={movie.id} {...movie} to={`/pelicula/${movie.id}`} />
             ))}
           </div>
@@ -87,6 +93,21 @@ export default function Inicio() {
           </Link>
         </div>
       </div>
+
+      {/* ---------- Toda la cartelera ---------- */}
+      {carouselMovies.length > 0 && (
+        <div className="inicio__carousel cinema-x-container">
+          <div className="inicio__feature-header">
+            <h2 className="inicio__feature-title">Toda la cartelera</h2>
+            <div className="inicio__feature-line" aria-hidden="true" />
+          </div>
+          <MovieCarousel>
+            {carouselMovies.map((movie) => (
+              <MovieCard key={movie.id} {...movie} to={`/pelicula/${movie.id}`} />
+            ))}
+          </MovieCarousel>
+        </div>
+      )}
     </section>
   )
 }

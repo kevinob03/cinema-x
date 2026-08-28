@@ -168,7 +168,7 @@
   color: var(--tertiary);
 }
 
-/* ---------- Sección Double Feature ---------- */
+/* ---------- Sección Cartelera Semanal ---------- */
 .inicio__feature {
   display: flex;
   flex-direction: column;
@@ -199,16 +199,30 @@
   background: var(--primary-container);
 }
 
-.inicio__feature-grid {
+.inicio__feature-grid,
+.inicio__weekly-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
 }
 
 @media (min-width: 768px) {
-  .inicio__feature-grid {
+  .inicio__feature-grid,
+  .inicio__weekly-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+@media (min-width: 1024px) {
+  .inicio__weekly-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- Sección Toda la cartelera ---------- */
+.inicio__carousel {
+  padding-top: 8px;
+  padding-bottom: 64px;
 }
 
 .inicio__more {
