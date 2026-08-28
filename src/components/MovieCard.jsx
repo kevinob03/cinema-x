@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../styles/MovieCard.css'
 
 export default function MovieCard({
@@ -8,12 +9,12 @@ export default function MovieCard({
   genre,
   category,
   accent = 'green',
-  showtimes = [],
   poster,
+  to,
 }) {
   const accentMod = accent === 'purple' ? 'movie-card--purple' : 'movie-card--green'
 
-  return (
+  const card = (
     <article className={`movie-card ${accentMod}`}>
       <div className="movie-card__accent-bar" aria-hidden="true" />
 
@@ -26,38 +27,34 @@ export default function MovieCard({
             <span className="movie-card__art-text">{genre}</span>
           </div>
         )}
-        <span className="movie-card__category">{category}</span>
+        {category && <span className="movie-card__category">{category}</span>}
       </div>
 
       <div className="movie-card__body">
         <h3 className="movie-card__title">{title}</h3>
-        <p className="movie-card__tagline">{tagline}</p>
+        {tagline && <p className="movie-card__tagline">{tagline}</p>}
         <div className="movie-card__chips">
-          <span className="chip">{rating}</span>
-          <span className="chip">{genre}</span>
-          <span className="chip">{year}</span>
+          <span className="chip">{year ?? '—'}</span>
+          <span className="chip">{genre ?? '—'}</span>
+          {rating != null && <span className="chip">★ {rating}</span>}
         </div>
 
-        {showtimes.length > 0 && (
-          <div className="movie-card__showtimes">
-            {showtimes.map((slot, i) => {
-              const label = typeof slot === 'object' ? slot.label : slot
-              const sold = typeof slot === 'object' && slot.soldOut
-              return (
-                <button
-                  key={`${label}-${i}`}
-                  type="button"
-                  className={`movie-card__time ${sold ? 'movie-card__time--sold' : ''}`}
-                  disabled={sold}
-                  title={sold ? 'Agotado' : 'Selección de sesión próximamente'}
-                >
-                  {label}
-                </button>
-              )
-            })}
-          </div>
+        {to && (
+          <Link to={to} className="movie-card__cta">
+            Ficha completa
+          </Link>
         )}
       </div>
     </article>
   )
+
+  if (to) {
+    return (
+      <Link to={to} className="movie-card__link" aria-label={`Ver ficha de ${title}`}>
+        {card}
+      </Link>
+    )
+  }
+
+  return card
 }
