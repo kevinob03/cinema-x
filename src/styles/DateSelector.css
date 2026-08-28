@@ -1,0 +1,95 @@
+.date-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--vhs-stack);
+  width: 100%;
+  padding: var(--gutter);
+  margin-bottom: 32px;
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+}
+
+.date-selector__track {
+  display: flex;
+  gap: var(--vhs-stack);
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  flex: 1;
+  padding: 2px;
+}
+
+.date-selector__track::-webkit-scrollbar {
+  display: none;
+}
+
+.date-selector__day {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--unit);
+  min-width: 72px;
+  padding: var(--vhs-stack) 12px;
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface-variant);
+  font-family: var(--font-meta);
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.date-selector__day:hover {
+  border-color: var(--primary-container);
+  color: var(--on-surface);
+}
+
+.date-selector__day--active {
+  background: var(--primary-container);
+  border-color: var(--primary-container);
+  color: var(--on-primary-container);
+  box-shadow: 0 0 10px var(--primary-container);
+}
+
+.date-selector__weekday {
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+}
+
+.date-selector__number {
+  font-size: var(--headline-mobile);
+  line-height: 1;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.date-selector__today {
+  font-size: 9px;
+  line-height: 12px;
+  letter-spacing: 0.15em;
+}
+
+.date-selector__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.date-selector__arrow:hover {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 0 12px var(--primary-container);
+}
+
+.date-selector__arrow:focus-visible {
+  outline: 2px solid var(--secondary-fixed);
+  outline-offset: 2px;
+}

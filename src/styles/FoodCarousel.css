@@ -1,0 +1,163 @@
+.food-carousel {
+  position: relative;
+}
+
+.food-carousel__track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--vhs-stack);
+  padding-bottom: var(--gutter);
+  scrollbar-width: thin;
+}
+
+.food-carousel__track::-webkit-scrollbar {
+  height: 8px;
+}
+
+.food-carousel__track::-webkit-scrollbar-track {
+  background: var(--surface-container-low);
+}
+
+.food-carousel__track::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 0;
+}
+
+.food-carousel__item {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-high);
+  border: 1px solid var(--outline-variant);
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.food-carousel__item:hover {
+  border-color: var(--tertiary-container);
+  box-shadow: 4px 4px 0 var(--tertiary-container);
+}
+
+@media (max-width: 480px) {
+  .food-carousel__item {
+    flex-basis: 260px;
+  }
+}
+
+.food-carousel__media {
+  position: relative;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 70% 20%, rgba(42, 229, 0, 0.18), transparent 55%),
+    radial-gradient(circle at 30% 80%, rgba(255, 74, 141, 0.16), transparent 50%),
+    linear-gradient(160deg, #0a0a0a 0%, #131313 100%);
+}
+
+.food-carousel__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.food-carousel__icon {
+  position: relative;
+  z-index: 1;
+  font-size: 56px;
+  color: var(--tertiary);
+}
+
+.food-carousel__body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--vhs-stack);
+  flex: 1;
+}
+
+.food-carousel__title {
+  font-family: var(--font-display);
+  font-size: var(--headline-mobile);
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.food-carousel__accent {
+  font-family: var(--font-meta);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tertiary);
+}
+
+.food-carousel__description {
+  font-family: var(--font-body);
+  font-size: var(--body);
+  line-height: 24px;
+  color: var(--on-surface-variant);
+}
+
+.food-carousel__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gutter);
+  padding-top: var(--vhs-stack);
+  margin-top: auto;
+  border-top: 1px solid rgba(92, 63, 70, 0.5);
+}
+
+.food-carousel__price {
+  font-family: var(--font-meta);
+  font-size: var(--headline-mobile);
+  line-height: 1;
+  color: var(--primary-container);
+}
+
+.food-carousel__soon {
+  font-family: var(--font-meta);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--outline);
+}
+
+.food-carousel__nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--vhs-stack);
+  margin-top: var(--gutter);
+}
+
+.food-carousel__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.food-carousel__arrow:hover {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 0 12px var(--primary-container);
+}
+
+.food-carousel__arrow:focus-visible {
+  outline: 2px solid var(--secondary-fixed);
+  outline-offset: 2px;
+}

@@ -30,6 +30,36 @@
     linear-gradient(160deg, #0a0a0a 0%, #131313 100%);
 }
 
+.inicio__hero-bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  filter: blur(6px) saturate(1.2) contrast(1.05);
+  transform: scale(1.05);
+  opacity: 0.9;
+  z-index: 1;
+  animation: hero-fade 0.8s ease;
+}
+
+.inicio__hero-bg-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      to bottom,
+      var(--background) 0%,
+      rgba(19, 19, 19, 0.4) 18%,
+      transparent 45%
+    ),
+    linear-gradient(
+      to top,
+      var(--background) 0%,
+      rgba(19, 19, 19, 0.6) 30%,
+      transparent 60%
+    );
+}
+
 .inicio__hero-bg::after {
   content: '';
   position: absolute;
@@ -39,6 +69,18 @@
     linear-gradient(to top, var(--background) 0%, rgba(19, 19, 19, 0.8) 55%, transparent 100%);
   opacity: 0.5;
   mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.inicio__hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .inicio__hero-inner {
@@ -241,4 +283,91 @@
 
 .inicio__more-link:hover {
   text-shadow: 0 0 12px var(--primary-container);
+}
+
+/* ---------- Hero: flechas y puntos ---------- */
+.inicio__hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--outline-variant);
+  background: rgba(19, 19, 19, 0.6);
+  color: var(--on-surface-variant);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  backdrop-filter: blur(2px);
+}
+
+.inicio__hero-arrow:hover {
+  color: var(--primary-container);
+  border-color: var(--primary-container);
+  background: rgba(19, 19, 19, 0.85);
+}
+
+.inicio__hero-arrow .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.inicio__hero-arrow--prev {
+  left: var(--margin-safe);
+}
+
+.inicio__hero-arrow--next {
+  right: var(--margin-safe);
+}
+
+@media (max-width: 480px) {
+  .inicio__hero-arrow--prev {
+    left: 12px;
+  }
+
+  .inicio__hero-arrow--next {
+    right: 12px;
+  }
+}
+
+.inicio__hero-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: var(--vhs-stack);
+}
+
+.inicio__hero-dot {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--outline);
+  background: transparent;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.inicio__hero-dot--active {
+  background: var(--primary-container);
+  border-color: var(--primary-container);
+  box-shadow: 0 0 8px var(--primary-container);
+}
+
+@keyframes hero-fade {
+  from { opacity: 0; }
+  to { opacity: 0.85; }
+}
+
+/* ---------- Sección Comida y Combos ---------- */
+.inicio__food {
+  padding-top: 8px;
+  padding-bottom: 64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inicio__hero-bg-img {
+    animation: none;
+  }
 }

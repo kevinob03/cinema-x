@@ -10,7 +10,7 @@ export default function Favoritos() {
   return (
     <section className="favoritos cinema-x-container">
       <header className="favoritos__header">
-        <h2 className="favoritos__title">Mis Favoritos</h2>
+        <h2 className="favoritos__title">Mis Películas</h2>
         <div className="favoritos__line" aria-hidden="true" />
       </header>
 
