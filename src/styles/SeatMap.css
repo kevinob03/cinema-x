@@ -128,3 +128,24 @@
   background: var(--surface-container);
   opacity: 0.5;
 }
+
+@media (max-width: 480px) {
+  .seatmap__row {
+    gap: 4px;
+  }
+
+  .seatmap__row-name {
+    width: 14px;
+    font-size: 8px;
+  }
+
+  .seatmap__seats {
+    gap: 4px;
+  }
+
+  .seat {
+    width: 22px;
+    height: 22px;
+    font-size: 8px;
+  }
+}

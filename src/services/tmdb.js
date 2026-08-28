@@ -9,11 +9,16 @@ export const RELEVANT_GENRE_IDS = [GENRE_HORROR, GENRE_SCI_FI, 9648, 53, 14]
 export const DECADE_START_YEAR = 1980
 export const DECADE_END_YEAR = 1989
 
+export const NINETIES_START_YEAR = 1990
+export const NINETIES_END_YEAR = 1995
+
 const DISCOVER_PAGES = [1, 2, 3, 4]
 const DISCOVER_SORT = 'popularity.desc'
 const DISCOVER_VOTE_COUNT_GTE = 100
 const START_DATE = '1980-01-01'
 const END_DATE = '1989-12-31'
+const NINETIES_START_DATE = '1990-01-01'
+const NINETIES_END_DATE = '1995-12-31'
 
 const discoverCache = new Map()
 let genresRequest = null
@@ -53,17 +58,17 @@ export async function getGenres() {
   return genresRequest
 }
 
-export async function discoverMovies({ page = 1 } = {}) {
+export async function discoverMovies({ page = 1, startDate = START_DATE, endDate = END_DATE } = {}) {
   ensureKey()
-  const key = `${page}`
+  const key = `${page}|${startDate}|${endDate}`
   if (discoverCache.has(key)) return discoverCache.get(key)
 
   const request = (async () => {
     const url = `${API_BASE}/discover/movie?${buildParams({
       include_adult: 'false',
       language: 'es-ES',
-      'primary_release_date.gte': START_DATE,
-      'primary_release_date.lte': END_DATE,
+      'primary_release_date.gte': startDate,
+      'primary_release_date.lte': endDate,
       with_genres: `${GENRE_HORROR}|${GENRE_SCI_FI}`,
       sort_by: DISCOVER_SORT,
       'vote_count.gte': String(DISCOVER_VOTE_COUNT_GTE),
@@ -87,6 +92,15 @@ export async function fetchCarteleraRaw() {
   ])
   const results = movieResponses.flatMap((res) => res.results ?? [])
   return { results, genreMap, genres }
+}
+
+export async function fetchUpcomingRaw() {
+  const genres = await getGenres()
+  const [response, genreMap] = await Promise.all([
+    discoverMovies({ page: 1, startDate: NINETIES_START_DATE, endDate: NINETIES_END_DATE }),
+    Promise.resolve(Object.fromEntries(genres.map((g) => [g.id, g.name]))),
+  ])
+  return { results: response.results ?? [], genreMap, genres }
 }
 
 export async function getMovieDetails(id) {

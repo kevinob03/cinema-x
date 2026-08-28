@@ -172,3 +172,49 @@
 .pelicula__screenings {
   margin-top: 8px;
 }
+
+/* ---------- Botón favorito en ficha ---------- */
+.pelicula__title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gutter);
+}
+
+.pelicula__title-row .pelicula__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.pelicula__fav {
+  flex-shrink: 0;
+  margin-top: 6px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface-container);
+  color: var(--on-surface-variant);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.pelicula__fav .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.pelicula__fav:hover {
+  color: var(--primary-container);
+  border-color: var(--primary-container);
+}
+
+.pelicula__fav--on {
+  color: var(--primary-container);
+  border-color: var(--primary-container);
+  background: rgba(255, 74, 141, 0.12);
+}
+
+.pelicula__fav--on:hover {
+  color: var(--error);
+  border-color: var(--error);
+}

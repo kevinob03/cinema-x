@@ -1,22 +1,27 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import { buildOrderNumber, formatCurrency } from '../utils/cart.js'
+import { buildOrderRecord, saveOrder } from '../utils/orders.js'
 import CartItemsList from '../components/CartItemsList.jsx'
 import CineState from '../components/CineState.jsx'
 import '../styles/Resumen.css'
 
 export default function Resumen() {
   const { items, subtotal, clear } = useCart()
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   const handleConfirm = () => {
-    const summary = {
+    const orderRecord = buildOrderRecord({
       orderNumber: buildOrderNumber(),
       items,
       subtotal,
-    }
+      owner: user ? { name: user.name, email: user.email } : null,
+    })
+    saveOrder(orderRecord)
     clear()
-    navigate('/confirmacion', { state: summary })
+    navigate('/confirmacion', { state: orderRecord })
   }
 
   return (

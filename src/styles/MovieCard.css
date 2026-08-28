@@ -145,6 +145,59 @@
   text-transform: uppercase;
 }
 
+/* ---------- Sello "Próximamente" ---------- */
+.movie-card__flag {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+  border: 1px solid var(--secondary-fixed);
+  padding: var(--unit) 8px;
+  font-family: var(--font-meta);
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---------- Botón favorito ---------- */
+.movie-card__fav {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(19, 19, 19, 0.85);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface-variant);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.movie-card__fav .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.movie-card__fav:hover {
+  color: var(--primary-container);
+  border-color: var(--primary-container);
+}
+
+.movie-card__fav--on {
+  color: var(--primary-container);
+  border-color: var(--primary-container);
+  background: rgba(255, 74, 141, 0.12);
+}
+
+.movie-card__fav--on:hover {
+  color: var(--error);
+  border-color: var(--error);
+}
+
 /* ---------- Cuerpo ---------- */
 .movie-card__body {
   padding: 24px;
@@ -180,7 +233,9 @@
 }
 
 .movie-card__link {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   color: inherit;
 }
 

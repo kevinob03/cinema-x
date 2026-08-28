@@ -1,46 +1,23 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { getMovieDetails, mapDetail } from '../services/tmdb.js'
 import { getScreening, getSeatLayout } from '../data/screenings.js'
 import { formatCurrency } from '../utils/cart.js'
 import { useCart } from '../context/CartContext.jsx'
 import SeatMap from '../components/SeatMap.jsx'
 import CineState from '../components/CineState.jsx'
+import useMovieDetails from '../hooks/useMovieDetails.js'
 import '../styles/Asientos.css'
 
 export default function Asientos() {
   const { movieId, screeningId } = useParams()
   const navigate = useNavigate()
   const { addTickets } = useCart()
+  const { movie, status, error } = useMovieDetails(movieId)
 
-  const [movie, setMovie] = useState(null)
-  const [status, setStatus] = useState('loading')
-  const [error, setError] = useState(null)
   const [selected, setSelected] = useState(() => new Set())
 
   const screening = useMemo(() => getScreening(movieId, screeningId), [movieId, screeningId])
   const layout = useMemo(() => (screening ? getSeatLayout(screening.id) : null), [screening])
-
-  useEffect(() => {
-    let cancelled = false
-    setStatus('loading')
-
-    getMovieDetails(movieId)
-      .then((data) => {
-        if (cancelled) return
-        setMovie(mapDetail(data))
-        setStatus('ready')
-      })
-      .catch((err) => {
-        if (cancelled) return
-        setError(err)
-        setStatus('error')
-      })
-
-    return () => {
-      cancelled = true
-    }
-  }, [movieId])
 
   const toggleSeat = (seatId) => {
     setSelected((current) => {
